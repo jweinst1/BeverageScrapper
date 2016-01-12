@@ -1,4 +1,5 @@
 require "BeverageScrapper/version"
+require "sentence"
 
 module BeverageScrapper
   class Wordbins
@@ -11,7 +12,7 @@ module BeverageScrapper
       %w(coke sprite pepsi dr.pepper drpepper cocacola cokezero mountaindew minutemaid fanta pepsi-cola a&w 7up mug cola dasani)
     end
     def self.positives
-      %w(refreshing cold tasty wonderful delicious yummy flavorful great fresh)
+      %w(refreshing cold tasty wonderful delicious yummy flavorful great fresh amazing)
     end
     def self.neutrals
       %w(bubbly cold icy flavored strong)
@@ -23,9 +24,24 @@ module BeverageScrapper
       %w(yucky disgusting horrid gross awful flavorless bland plain boring bad raunchy nasty tasteless
  stale flat)
     end
+    def self.generals
+      %w(soda sodapop lemonade water tea coffee juice pop beer wine cola cider)
+    end
+    def self.actions
+      %w(drink slurp sip chug drunk drank)
+    end
+    def self.pronouns
+      %w(i me you your they he she him her)
+    end
+  end
+  class Classify
+    #using bayes, determines if sentence is about beverages
+    def self.aboutbeverages(text)
+      brands = BeverageScrapper::Wordbins.brands
+    end
   end
   class Utils
-    
+
     #counts all the words in a text in linear time
     def self.wordcount(text)
       words = text.split(' ')
