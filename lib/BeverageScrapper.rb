@@ -9,7 +9,8 @@ module BeverageScrapper
    end
    #list of strings of softdrink brands
     def self.brands
-      %w(coke sprite pepsi dr.pepper drpepper cocacola cokezero mountaindew minutemaid fanta pepsi-cola a&w 7up mug cola dasani)
+      %w(coke sprite pepsi dr.pepper drpepper cocacola cokezero mountaindew minutemaid fanta pepsi-cola a&w 7up mug cola dasani
+)
     end
     def self.positives
       %w(refreshing cold tasty wonderful delicious yummy flavorful great fresh amazing)
@@ -33,11 +34,46 @@ module BeverageScrapper
     def self.pronouns
       %w(i me you your they he she him her)
     end
+    def self.stopwords
+      %w(the a an is was are were not there how what did do does can cant could would should it)
+    end
   end
   class Classify
-    #using bayes, determines if sentence is about beverages
-    def self.aboutbeverages(text)
+    #using bayes, determines how strong a text is about beverages
+    def self.beveragerating(text)
       brands = BeverageScrapper::Wordbins.brands
+      generals = BeverageScrapper::Wordbins.generals
+      length = text.split(" ").size.0
+      counter = {brand: 0.0, drinks: 0.0}
+      for elem in text.split(" ")
+        if brands.include?(elem)
+          counter[:brand] += 1
+        elsif generals.include?(elem)
+          counter[:drinks] += 1
+        end
+      end
+      return (counter[:brand]+counter[:drinks])/length
+    end
+    #calculates the net positive rating of a text.
+    def self.opinionrating(text)
+      good = BeverageScrapper::Wordbins.positives
+      bad = BeverageScrapper::Wordbins.negatives
+      length = text.split(" ").size.0
+      counter = {good:0.0, bad:0.0}
+      for elem in text.split(" ")
+        if good.include?(elem)
+          counter[:good] += 1
+        elsif bad.include?(elem)
+          counter[:bad] += 1
+        end
+      end
+      return counter[:good]-counter[:bad]
+    end
+  end
+  class Find
+    #finds words coming after drink generals or brands in the text
+    def afterdrinks(text)
+
     end
   end
   class Utils
@@ -65,6 +101,14 @@ module BeverageScrapper
         end
       end
       return false
+    end
+
+    def self.removestops(text)
+      for elem in BeverageScrapper::Wordbins.stopwords
+        patt = Regexp.new(" " + elem + " ")
+        text = text.gsub(patt, '')
+      end
+      return text
     end
   end
 end
