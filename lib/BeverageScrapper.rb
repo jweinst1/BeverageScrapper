@@ -2,6 +2,7 @@ require "BeverageScrapper/version"
 
 module BeverageScrapper
   require "sentence"
+  require "subject_list"
   class Wordbins
     #words concerning money
    def self.money
@@ -36,6 +37,9 @@ module BeverageScrapper
     end
     def self.stopwords
       %w(the a an is was are were not there how what did do does can cant could would should it)
+    end
+    def self.descriptors
+      %w(looks feels tastes smells looks is are was seems felt tasted smelled)
     end
   end
   class Classify
@@ -72,7 +76,7 @@ module BeverageScrapper
   end
   class Find
     #finds words coming after drink generals or brands in the text
-    def afterdrink(text, drink)
+    def self.afterdrink(text, drink)
       matches = []
       patt = Regexp.new(drink + ' ([a-zA-Z0-9]+)')
       for elem in text.scan(patt)
@@ -80,11 +84,32 @@ module BeverageScrapper
       end
       return matches
     end
-    def beforedrink(text, drink)
+    #finds the following two words after every drink. will be in format [ "first", "second"]
+    def self.twoafterdirnk(text, drink)
+      matches = []
+      patt = Regexp.new(drink + ' ([a-zA-Z0-9]+) ([a-zA-Z0-9]+)')
+      for elem in text.scan(patt)
+        matches << elem
+      end
+      return matches
+    end
+    def self.beforedrink(text, drink)
       matches = []
       patt = Regexp.new('([a-zA-Z0-9]+) ' + drink)
       for elem in text.scan(patt)
         mathces << elem[0]
+      end
+      return matches
+    end
+    #checks for instances of text where a drink's taste is described.
+    def self.drinkdescriptors(text, drink)
+      tastes = BeverageScrapper::Find.afterdrink(text, drink)
+      descriptions = BeverageScrapper::Wordbins.descriptors
+      matches = []
+      for elem in tastes
+        if descriptions.include?(elem)
+          matches << elem
+        end
       end
       return matches
     end

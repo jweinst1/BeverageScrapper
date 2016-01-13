@@ -1,7 +1,7 @@
 #object for storing informating about specific subjects
 require 'set'
 class SubjectList
-  def initialize(words)
+  def initialize(words=[])
     @list = words
     @set = Set.new
     @dict = {}
@@ -21,5 +21,13 @@ class SubjectList
   end
   def length
     @list.size
+  end
+  def contains(elem)
+    @set.include?(elem)
+  end
+  def add(elem)
+    @list << elem
+    @set << elem
+    @dict[:elem] = []
   end
 end

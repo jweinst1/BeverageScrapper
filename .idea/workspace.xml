@@ -61,21 +61,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BeverageScrapper.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BeverageScrapper.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/BeverageScrapper.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="41" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.5210918">
+              <caret line="86" column="91" selection-start-line="86" selection-start-column="91" selection-end-line="86" selection-end-column="91" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="subject_list.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="subject_list.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/subject_list.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.81885856">
-              <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -139,8 +139,8 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/BeverageScrapper.gemspec" />
         <option value="$PROJECT_DIR$/lib/sentence.rb" />
-        <option value="$PROJECT_DIR$/lib/BeverageScrapper.rb" />
         <option value="$PROJECT_DIR$/lib/subject_list.rb" />
+        <option value="$PROJECT_DIR$/lib/BeverageScrapper.rb" />
       </list>
     </option>
   </component>
@@ -506,18 +506,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/BeverageScrapper.rb">
+    <entry file="file://$PROJECT_DIR$/lib/subject_list.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="41" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
+          <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/subject_list.rb">
+    <entry file="file://$PROJECT_DIR$/lib/BeverageScrapper.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81885856">
-          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.5210918">
+          <caret line="86" column="91" selection-start-line="86" selection-start-column="91" selection-end-line="86" selection-end-column="91" />
           <folding />
         </state>
       </provider>
