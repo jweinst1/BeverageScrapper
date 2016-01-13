@@ -1,7 +1,7 @@
 require "BeverageScrapper/version"
-require "sentence"
 
 module BeverageScrapper
+  require "sentence"
   class Wordbins
     #words concerning money
    def self.money
@@ -72,8 +72,21 @@ module BeverageScrapper
   end
   class Find
     #finds words coming after drink generals or brands in the text
-    def afterdrinks(text)
-
+    def afterdrink(text, drink)
+      matches = []
+      patt = Regexp.new(drink + ' ([a-zA-Z0-9]+)')
+      for elem in text.scan(patt)
+        matches << elem[0]
+      end
+      return matches
+    end
+    def beforedrink(text, drink)
+      matches = []
+      patt = Regexp.new('([a-zA-Z0-9]+) ' + drink)
+      for elem in text.scan(patt)
+        mathces << elem[0]
+      end
+      return matches
     end
   end
   class Utils
