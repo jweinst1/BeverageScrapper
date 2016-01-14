@@ -3,6 +3,17 @@ require "BeverageScrapper/version"
 module BeverageScrapper
   require "sentence"
   require "subject_list"
+  #Makes an overall summary of the text in regards to beverages and drinks, in string form
+  def summary(text)
+    summ = ""
+    descrating = BeverageScrapper::Classify.descriptrating(text)
+    opinionrating = BeverageScrapper::Classify.opinionrating(text)
+    bevtopic = BeverageScrapper::Classify.beveragerating(text)
+    summ += "The analyzed passage has a beverage topic rating of #{bevtopic}, the frequency of words about beverages or brands of beverages.\n"
+    summ += "The passage has a net positive opinion of #{opinionrating}, based on the frequency of positive and negative adjectives.\n"
+    summ += "The passage has a descriptive rating of #{opinionrating}, the proportion of words that describe a beverage."
+
+  end
   class Wordbins
     #words concerning money
    def self.money
@@ -38,8 +49,9 @@ module BeverageScrapper
     def self.stopwords
       %w(the a an is was are were not there how what did do does can cant could would should it)
     end
+   #verbs meant to be paired with drink adjectives
     def self.descriptors
-      %w(looks feels tastes smells looks is are was seems felt tasted smelled)
+      %w(looks feels tastes smells looks is are was seems felt tasted smelled appears flavored)
     end
   end
   class Classify
@@ -72,6 +84,18 @@ module BeverageScrapper
         end
       end
       return counter[:good]-counter[:bad]
+    end
+    #checks how descriptive the text is
+    def self.descriptrating(text)
+      desc = BeverageScrapper::Wordbins.descriptors
+      length = text.split(" ").size.0
+      count = 0.0
+      for elem in text.split(" ")
+        if desc.include?(elem)
+          count += 1
+        end
+      end
+      return count/length
     end
   end
   class Find
@@ -112,6 +136,31 @@ module BeverageScrapper
         end
       end
       return matches
+    end
+    #checks for instances of text where an action word is used with a drink.
+    def drinkaction(text, drink)
+      actions = BeverageScrapper::Wordbins.actions
+      matches = []
+      for elem in actions
+        pat = Regexp.new(elem+ " " +drink)
+        matches += text.scan(pat)
+      end
+      return matches
+    end
+
+    def mostcommondrink(text)
+      drinks = BeverageScrapper::Wordbins.brands
+      generals = BeverageScrapper::Wordbins.generals
+      countdict = {}
+      for elem in text.split(" ")
+        if drinks.include?(elem)
+          if countdict.include?(elem)
+            countdict[elem] += 1
+          else
+            countdict[elem] = 1
+          end
+        end
+      end
     end
   end
   class Utils
