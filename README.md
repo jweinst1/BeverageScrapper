@@ -1,4 +1,5 @@
 # BeverageScrapper
+[Gem Page](https://rubygems.org/gems/BeverageScrapper)
 
 BeverageScrapper is an API for data mining information about soft drinks, beverages, drinks, and other information relating to opinions and data on drinks.
 The Gem features many different analysis methods, such as determining the percentage of a text being about beverages, how often a specific soft drink is mentioned, and in what context, and much more.
