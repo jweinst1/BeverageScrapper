@@ -5,13 +5,15 @@ module BeverageScrapper
   require "subject_list"
   #Makes an overall summary of the text in regards to beverages and drinks, in string form
   def summary(text)
-    summ = ""
     descrating = BeverageScrapper::Classify.descriptrating(text)
     opinionrating = BeverageScrapper::Classify.opinionrating(text)
     bevtopic = BeverageScrapper::Classify.beveragerating(text)
-    summ += "The analyzed passage has a beverage topic rating of #{bevtopic}, the frequency of words about beverages or brands of beverages.\n"
+    mostcommondrink = BeverageScrapper::Find.mostcommondrink(text)
+    summ = "The analyzed passage has a beverage topic rating of #{bevtopic}, the frequency of words about beverages or brands of beverages.\n"
     summ += "The passage has a net positive opinion of #{opinionrating}, based on the frequency of positive and negative adjectives.\n"
-    summ += "The passage has a descriptive rating of #{opinionrating}, the proportion of words that describe a beverage."
+    summ += "The passage has a descriptive rating of #{descrating}, the proportion of words that describe a beverage.\n"
+    summ += "#{mostcommondrink} was the most commonly mentioned drink word in the passage.\n"
+    return summ
 
   end
   class Wordbins
@@ -138,7 +140,7 @@ module BeverageScrapper
       return matches
     end
     #checks for instances of text where an action word is used with a drink.
-    def drinkaction(text, drink)
+    def self.drinkaction(text, drink)
       actions = BeverageScrapper::Wordbins.actions
       matches = []
       for elem in actions
@@ -147,8 +149,8 @@ module BeverageScrapper
       end
       return matches
     end
-
-    def mostcommondrink(text)
+    #gets the most common drink word mentioned in the text
+    def self.mostcommondrink(text)
       drinks = BeverageScrapper::Wordbins.brands
       generals = BeverageScrapper::Wordbins.generals
       countdict = {}
@@ -159,8 +161,16 @@ module BeverageScrapper
           else
             countdict[elem] = 1
           end
+        elsif generals.include?(elem)
+          if countdict.include?(elem)
+            countdict[elem] += 1
+          else
+            countdict[elem] = 1
+          end
         end
       end
+      keylst = countdict.keys
+      return countdict.key(keylst.max)
     end
   end
   class Utils
