@@ -11,7 +11,8 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{A Gem API for data mining information on beverages and drinks from text.}
   spec.description   = %q{BeverageScrapper is a Gem that allows you to mine data about soft drinks and beverages from text. It has many features
-such as giving you information on how often a drink is mentioned, if the opinion of the drink is positive or negative, and much more.\nBeverageScrapper is perfect for getting information about consumer opinions or trends about drink purchasing.}
+such as giving you information on how often a drink is mentioned, if the opinion of the drink is positive or negative, and much more.\nBeverageScrapper is perfect for getting information about consumer opinions or trends about drink purchasing.
+Check out the home page for more information or the documentation.}
   spec.homepage      = "https://github.com/jweinst1/BeverageScrapper"
   spec.license       = "MIT"
 

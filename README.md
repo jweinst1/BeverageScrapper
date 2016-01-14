@@ -51,7 +51,21 @@ For a specific alphanumeric word, drink, finds all the words in the text occurin
 ####`BeverageScrapper::Find.twoafterdrink(text, drink)`:
 Does the same as `afterdrink` but returns an array of two element arrays of strings, where the first string in each subarray represents the first word after drink, and the second word represents the second word after drink.
 
+####`BeverageScrapper::Find.beforedrink(text, drink)`:
 
+For a specific alphanumeric word, drink, finds all the words in the text occuring directly before drink. Returns an array of strings.
+
+####`BeverageScrapper::Find.drinkdescriptors(text, drink)`:
+
+Returns an array of strings, representing the words used directly after a specific drink that are description words. For example, `coke tastes`, would have `tastes` returned. However, `coke and`, would not return `and` in the resulting array.
+
+####`BeverageScrapper::Find.drinkaction(text, drink)`:
+
+Returns an array of strings, representing the words used with a specific drink that signify an action related to drinking or beverages. For example, `drank cola` would match `drank`.
+
+####`BeverageScrapper::Find.mostcommondrink(text, drink)`:
+
+Returns the most commonly mentioned drink word in the text. Can either be a brand name or general name.
 
 ## Development
 
